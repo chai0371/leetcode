@@ -1,0 +1,37 @@
+class Solution {
+    public int minSwaps(int[] nums) {
+        // window size-count of 1 total no of 1s
+        int windowSize =0;
+        for (int num : nums){
+            windowSize+=num;
+        }
+    //find zeros in 1 st window
+        int curZeros=0;
+        for(int i=0;i<windowSize;i++){
+            if (nums[i]==0){
+                curZeros++;
+            }
+        }
+        //solve the reaming window
+        int minZeros=curZeros;
+        int start=0;
+        int end= windowSize-1;
+        int n=nums.length;
+         while(start<n){
+            //if removed ele was 0,inc 0 cnt
+            if (nums[start]==0){
+                curZeros--;
+            }
+            start++;
+            //if included ele is 0,inc 0 cnt
+            end ++;
+            if(nums[end%n]==0){
+                curZeros++;
+            }
+            minZeros=Math.min(minZeros,curZeros);
+
+        }
+        return minZeros;
+
+    }
+}
