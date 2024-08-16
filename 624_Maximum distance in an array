@@ -1,0 +1,23 @@
+import java.util.List;
+
+public class Solution {
+
+    public int maxDistance(List<List<Integer>> arrs) {
+        int diff = 0;
+        int start = arrs.get(0).get(0);
+        int end = arrs.get(0).get(arrs.get(0).size() - 1);
+        
+        for (int i = 1; i < arrs.size(); i++) {
+            diff = Math.max(
+                diff, Math.max(
+                    Math.abs(arrs.get(i).get(0) - end),
+                    Math.abs(arrs.get(i).get(arrs.get(i).size() - 1) - start)
+                )
+            );
+            
+            start = Math.min(start, arrs.get(i).get(0));
+            end = Math.max(end, arrs.get(i).get(arrs.get(i).size() - 1));
+        }
+        return diff;
+    }
+}
