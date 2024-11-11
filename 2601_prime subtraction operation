@@ -1,0 +1,45 @@
+class Solution {
+
+    private boolean isprime(int number){
+        if(number<=1){
+            return false;
+        }
+        if(number<=3){
+            return true;
+        }
+        if(number%2==0 || number%3==0){
+            return false;
+        }
+        for(int i=5;i*i<=number;i+=6){
+            if(number%i==0|| number%(i+2)==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean primeSubOperation(int[] nums) {
+        int n=nums.length;
+        for(int firstprime=nums[0]-1;firstprime>=2;firstprime--){
+           if(isprime(firstprime))
+           {
+            nums[0]=nums[0]-firstprime;
+            break;
+           }
+        }
+        for(int i=1;i<n;i++){
+            boolean foundprime=false;
+            int originalvalue=nums[i];
+            for(int prime=nums[i]-1;prime>=2;prime--){
+                if(isprime(prime)&&(nums[i]-prime>nums[i-1])){
+                    nums[i]=nums[i]-prime;
+                    foundprime=true;
+                    break;
+                }
+            }
+            if(!foundprime && nums[i]<=nums[i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
