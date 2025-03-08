@@ -7,6 +7,7 @@ class Solution {
             ans=values[i]-i+m;
             if(values[i]+i>m)
             m=values[i]+i;
+
         }
         return ans;
     }
